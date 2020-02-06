@@ -7,16 +7,16 @@ Algorithm:
 
     1) Create an empty list to be filled with random elements
 
-    2) Set a random range from 0 to 25 and add it to the ASCII equivalent of
-      "A" to produce random letters from "A" to "Z" and append it to the empty list
+    2) Generate random number at particular iterations and append them to the empty list                            #2) Set a random range from 0 to 25 and add it to the ASCII equivalent of
+                                                                                                                    "A" to produce random letters from "A" to "Z" and append it to the empty list
+    3) Perform both sorting algorithms
+                                                                                                                    #3) Repeat step #2 at your leisure
+    4) Go back to step #2 but for every iteration, multiply the iterations of generating random numbers by 10
+                                                                                                                    #4) Ask user to select which sorting algorithm to perform
 
-    3) Repeat step #2 at your leisure
+                                                                                                                    #4.1) If user inputs "1" then perform insertion sort
 
-    4) Ask user to select which sorting algorithm to perform
-
-        4.1) If user inputs "1" then perform insertion sort
-
-        4.2) If user inputs "2" or any string if the user is bored, then perform merge sort
+                                                                                                                    #4.2) If user inputs "2" or any string if the user is bored, then perform merge sort
 
         Insertion sort:
 
@@ -65,6 +65,7 @@ Algorithm:
 '''
 import random
 import time
+import matplotlib.pyplot
 
 def insertionsort(arg,arglist):
     for indeks in range(len(arglist)):
@@ -138,7 +139,7 @@ def mergesortpart2(arglist):
             else:
                 final.extend(left)
             return final #return the sorted list
-
+print("PATIENCE IS A VIRTUE")
 LETTERTONUMBER=ord("A") # Setting a basis for conerting random numbers to their respective element in the alphabet
 elements=1
 xaxis=[]
@@ -148,6 +149,7 @@ scrambledlist=[]
 sortlist=[]
 while elements<10000:
     elements*=10
+    xaxis.append(elements)
     for i in range(0, elements): #The scrambled list will be filled with 5 random letters
         scrambledlist.append(int(random.randint(0,elements))) # This will append the converted random numbers to letters
     #print(scrambledlist)
@@ -191,3 +193,9 @@ while elements<10000:
     scrambledlist.clear()
 print(yaxisinsert)
 print(yaxismerge)
+matplotlib.pyplot.plot(xaxis, yaxisinsert)
+matplotlib.pyplot.plot(xaxis, yaxismerge)
+matplotlib.pyplot.xlabel('number of entries')
+matplotlib.pyplot.ylabel('time')
+matplotlib.pyplot.title('Difference between merge and insertion sorting')
+matplotlib.pyplot.show()
